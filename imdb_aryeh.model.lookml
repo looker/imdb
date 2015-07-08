@@ -39,8 +39,16 @@
   joins:
     - join: cast_info
       sql_on: ${title.id} = ${cast_info.movie_id}
+      relationship: one_to_many
     - join: char_name
-      sql_on: ${cast_info.person_role_id} = ${char_name.id}
+      sql_on: ${char_name.id} = ${cast_info.person_role_id}
+      relationship: one_to_many
     - join: name
-      sql_on: ${name.id} = ${cast_info.person_id}
+      sql_on: ${cast_info.person_id} = ${name.id}
+      relationship: many_to_one
+    - join: movie_keyword
+      sql_on: ${title.id} = ${movie_keyword.movie_id}
+      relationship: one_to_many
+    - join: keyword
+      sql_on: ${movie_keyword.keyword_id} = ${keyword.id}
 

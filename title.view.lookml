@@ -25,6 +25,16 @@
   - dimension: kind_id
     type: int
     sql: ${TABLE}.kind_id
+    
+  - dimension: kind
+    sql_case:
+      Movie: ${kind_id} = 1
+      TV Show: ${kind_id} = 2
+      TV Movie: ${kind_id} = 3
+      Video: ${kind_id} = 4
+      Video Game: ${kind_id} = 6
+      TV Mini Series: ${kind_id} = 7
+      Unknown: true
 
   - dimension: md5sum
     sql: ${TABLE}.md5sum
@@ -48,5 +58,5 @@
 
   - measure: count
     type: count
-    drill_fields: [id]
+    drill_fields: [id, title, kind, production_year]
 

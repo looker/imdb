@@ -20,6 +20,10 @@
 - explore: movie_companies
 
 - explore: movie_info
+  joins:
+  - join: title
+    sql_on: ${movie_info.movie_id} = ${title.id}
+    relationship: many_to_one
 
 - explore: movie_info_idx
 
@@ -57,4 +61,15 @@
     - join: movie_genre
       sql_on: ${title.id} = ${movie_genre.movie_id}
       relationship: one_to_many
+    - join: movie_language
+      sql_on: ${title.id} = ${movie_language.movie_id}
+      relationship: one_to_many
+    - join: movie_color
+      sql_on: ${title.id} = ${movie_color.movie_id}
+      relationship: one_to_many
+    - join: movie_country_rating
+      sql_on: ${title.id} = ${movie_country_rating.movie_id}
+      relationship: one_to_many
+      
+      
 

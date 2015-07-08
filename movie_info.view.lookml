@@ -24,4 +24,8 @@
   - measure: count
     type: count
     drill_fields: [id]
+    
+  - measure: movie_count
+    type: count_distinct
+    sql: ${movie_id}
 

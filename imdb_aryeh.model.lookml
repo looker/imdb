@@ -51,4 +51,10 @@
       relationship: one_to_many
     - join: keyword
       sql_on: ${movie_keyword.keyword_id} = ${keyword.id}
+      relationship: many_to_one
+    - join: movie_pornwords
+      foreign_key: title.id
+    - join: movie_genre
+      sql_on: ${title.id} = ${movie_genre.movie_id}
+      relationship: one_to_many
 

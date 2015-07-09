@@ -1,4 +1,5 @@
 - explore: keyword_keyword
+  hidden: true
   joins:
   - join: keyword1 
     from: keyword
@@ -36,6 +37,7 @@
  
  
 - explore: likely_porn_words
+  hidden: true
   joins:
   - join: keyword
     from: keyword

@@ -22,7 +22,7 @@
       FROM (
         SELECT 
           movie_id
-          , CAST(REPLACE(REPLACE(SPLIT_PART(info,' ',1),'$',''),',','') AS NUMERIC) as weekend_amount
+          , CAST(REPLACE(REPLACE(SPLIT_PART(info,' ',1),'$',''),',','') AS NUMERIC) / 1000000.0 as weekend_amount 
           , info as info
           , TO_DATE(RTRIM(REGEXP_SUBSTR(info,'[^\(]*$'),1),'DD Month YYYY') as weekend_date
          
@@ -42,6 +42,7 @@
     
   - dimension: weekend_amount
     type: number
+    value_format: '$0.00 \M'
     
   - dimension: info
   
@@ -54,7 +55,9 @@
   - measure: total_amount
     type: sum
     sql: ${weekend_amount}
+    value_format: '$0.00 \M'
     
   - measure: average_amount
     type: average
     sql: ${weekend_amount}
+    value_format: '$0.00 \M'

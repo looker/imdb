@@ -29,6 +29,22 @@
   - dimension: role_id
     type: int
     sql: ${TABLE}.role_id
+    
+  - dimension: role
+    sql_case:
+      Actor (uncredited): ${role_id} = 1
+      Actor: ${role_id} = 2
+      Producer: ${role_id} = 3
+      Writer: ${role_id} = 4
+      Director of Photography: ${role_id} = 5
+      Conductor: ${role_id} = 6
+      Costume: ${role_id} = 7
+      Director: ${role_id} = 8
+      Editing: ${role_id} = 9
+      Other Crew: ${role_id} = 10
+      Production Design: ${role_id} = 11
+      12: ${role_id} = 12
+      
 
   - measure: count
     type: count

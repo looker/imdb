@@ -50,6 +50,20 @@
     - join: name
       sql_on: ${cast_info.person_id} = ${name.id}
       relationship: many_to_one
+
+    - join: cast_info2
+      from: cast_info
+      sql_on: ${title.id} = ${cast_info2.movie_id}
+      relationship: one_to_many
+    - join: char_name2
+      from: char_name
+      sql_on: ${char_name2.id} = ${cast_info2.person_role_id}
+      relationship: one_to_many
+    - join: name2
+      from: name
+      sql_on: ${cast_info2.person_id} = ${name2.id}
+      relationship: many_to_one
+
     - join: movie_keyword
       sql_on: ${title.id} = ${movie_keyword.movie_id}
       relationship: one_to_many

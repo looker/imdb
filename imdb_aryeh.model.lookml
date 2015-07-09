@@ -40,6 +40,7 @@
 - explore: person_info
 
 - explore: title
+  view: title
   joins:
     - join: cast_info
       sql_on: ${title.id} = ${cast_info.movie_id}
@@ -84,6 +85,8 @@
     - join: movie_country_rating
       sql_on: ${title.id} = ${movie_country_rating.movie_id}
       relationship: one_to_many
-      
-      
-
+    - join: movie_country_rating2
+      from: movie_country_rating
+      sql_on: ${title.id} = ${movie_country_rating2.movie_id}
+      relationship: one_to_many
+ 

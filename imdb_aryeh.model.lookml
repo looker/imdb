@@ -41,6 +41,10 @@
     - join: movie_genre
       sql_on: ${title.id} = ${movie_genre.movie_id}
       relationship: one_to_many
+    - join: movie_genre2
+      from: movie_genre
+      sql_on: ${title.id} = ${movie_genre2.movie_id}
+      relationship: one_to_many
     - join: movie_language
       sql_on: ${title.id} = ${movie_language.movie_id}
       relationship: one_to_many

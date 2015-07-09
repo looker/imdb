@@ -18,7 +18,7 @@
       SELECT 
         * 
         , ROW_NUMBER() OVER(ORDER BY movie_id, weekend_date) as id
-        , ROW_NUMBER() OVER(PARTITION BY movie_id ORDER BY weekend_date) as weekend_number
+        , ROW_NUMBER() OVER(PARTITION BY movie_id ORDER BY weekend_date DESC) as weekend_number
       FROM (
         SELECT 
           movie_id

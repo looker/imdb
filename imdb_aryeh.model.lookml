@@ -89,4 +89,8 @@
       from: movie_country_rating
       sql_on: ${title.id} = ${movie_country_rating2.movie_id}
       relationship: one_to_many
+      
+    - join: us_boxoffice
+      sql_on: ${title.id} = ${us_boxoffice.movie_id}
+      relationship: one_to_many
  

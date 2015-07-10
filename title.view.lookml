@@ -6,7 +6,6 @@
     primary_key: true
     type: int
     sql: ${TABLE}.id
-    hidden: true
 
   - dimension: episode_nr
     type: int

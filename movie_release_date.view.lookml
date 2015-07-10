@@ -1,39 +1,41 @@
 
-- explore: movie_release_date
+- explore: movie_release_dates
   extends: title_simple
   hidden: true
   joins:
   - join: title
-    sql_on: ${movie_release_date.movie_id} = ${title.id}
+    sql_on: ${movie_release_dates.movie_id} = ${title.id}
     relationship: many_to_one
 
-#
-# Boxoffice data is stored as type 107.  The records we are interested in look like:
-#  $99,999 (USA) 10 November 2012
-#
-# There is a number for each weekend.
-# 
-- view: movie_release_date
+- view: movie_release_dates
   derived_table:
     persist_for: 100 hours
     sortkeys: [movie_id]
     sql: |
       SELECT 
         * 
-        , ROW_NUMBER() OVER(ORDER BY movie_id, weekend_date) as id
-        , ROW_NUMBER() OVER(PARTITION BY movie_id ORDER BY weekend_date DESC) as weekend_number
+        , ROW_NUMBER() OVER(ORDER BY movie_id, release_date) as id
+        , RANK() OVER(PARTITION BY movie_id ORDER BY release_date) as index
       FROM (
         SELECT 
           movie_id
-          , CAST(REPLACE(REPLACE(SPLIT_PART(info,' ',1),'$',''),',','') AS NUMERIC) / 1000000.0 as weekend_amount 
-          , info as info
-          , TO_DATE(RTRIM(REGEXP_SUBSTR(info,'[^\(]*$'),1),'DD Month YYYY') as weekend_date
-         
+          , SPLIT_PART(info,':',1) as country
+          , note as kind
+          , SPLIT_PART(info,':',2) as date_string
+          , CASE 
+              WHEN SPLIT_PART(info,':',2) ~ '^\\d\\d [A-Za-z]+ \\d\\d\\d\\d$'
+                THEN TO_DATE( SPLIT_PART(info,':',2), 'DD Month YYYY')
+              WHEN SPLIT_PART(info,':',2) ~ '^[A-Za-z]+ \\d\\d\\d\\d$'
+                THEN TO_DATE( SPLIT_PART(info,':',2), 'Month YYYY')
+              WHEN SPLIT_PART(info,':',2) ~ '^\\d\\d\\d\\d$'
+                THEN TO_DATE( SPLIT_PART(info,':',2), 'YYYY')
+              ELSE NULL
+            END as release_date
         FROM public.movie_info AS movie_info
         WHERE 
-          movie_info.info_type_id = 107
-          AND info ILIKE '$%(USA)%(%)' and info ~ '\\d\\d [A-Z][a-z]* \\d\\d\\d\\d\\\)$'
+          movie_info.info_type_id = 16
       ) AS BOO
+      WHERE release_date IS NOT NULL
       
   fields:
   - dimension: id
@@ -43,24 +45,72 @@
   - dimension: movie_id
     hidden: true
     
-  - dimension: weekend_amount
-    type: number
-    value_format: '$#,##0.00 \M'
-    
-  - dimension: info
-  
-  - dimension: weekend_date
-    type: date
+  - dimension: country
 
-  - dimension: weekend_number
+  - dimension: date_string
+
+  - dimension: release
+    type: time
+    timeframes: [date, week, month, year]
+    sql: ${TABLE}.release_date
+
+  - dimension: kind
+  
+  - dimension: index
     type: number
     
-  - measure: total_amount
-    type: sum
-    sql: ${weekend_amount}
-    value_format: '$#,##0.00 \M'
+  - measure: count
+    type: count
+    drill_fields: [id, title.title, title.id, country, release_date, index, kind]
+
+
+#  Fact table about releases, one per title.
+
+- explore: movie_release_facts
+  extends: title_simple
+  hidden: true
+  joins:
+  - join: title
+    sql_on: ${movie_release_facts.movie_id} = ${title.id}
+    relationship: many_to_one
+
+- view: movie_release_facts
+  derived_table:
+    persist_for: 100 hours
+    sortkeys: [movie_id]
+    sql: |
+      SELECT
+        movie_id
+        , MIN(release_date) as first_release_date
+        , MAX(release_date) as last_release_date
+        , COUNT(DISTINCT CASE WHEN index = 1 THEN country ELSE NULL END) simultaneous_countries
+        , COUNT(DISTINCT CASE WHEN index = 1 and country = 'USA' THEN 1 ELSE NULL END) usa_premiere
+      FROM ${movie_release_dates.SQL_TABLE_NAME} as mrd
+      GROUP BY 1
+  
+  fields:
+  - dimension: movie_id
+    hidden: true
+    primary_key: true
     
-  - measure: average_amount
-    type: average
-    sql: ${weekend_amount}
-    value_format: '$#,##0.00 \M'
+  - dimension: first_release
+    type: time
+    timeframes: [date, week, month, year]
+    sql: ${TABLE}.first_release_date
+    
+  - dimension: last_release
+    type: time
+    timeframes: [date, week, month, year]
+    sql: ${TABLE}.last_release_date
+  
+  - dimension: simultaneous_countries
+    type: number
+    
+  - dimension: usa_premiere
+    label: USA Premiere
+    type: yesno
+    sql: ${TABLE}.usa_premiere = 1
+    
+    
+    
+    

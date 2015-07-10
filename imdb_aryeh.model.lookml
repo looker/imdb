@@ -96,6 +96,16 @@
     - join: us_boxoffice
       sql_on: ${title.id} = ${us_boxoffice.movie_id}
       relationship: one_to_many
+
+    - join: movie_release_dates
+      sql_on: ${title.id} = ${movie_release_dates.movie_id}
+      relationship: one_to_many
+      
+    - join: movie_release_facts
+      sql_on: ${title.id} = ${movie_release_facts.movie_id}
+      relationship: many_to_one
+      view_label: Title
+      
       
 - explore: boxoffice_movie
   extends: title

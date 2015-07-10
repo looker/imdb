@@ -6,10 +6,12 @@
     primary_key: true
     type: int
     sql: ${TABLE}.id
+    hidden: true
 
   - dimension: movie_id
     type: int
     sql: ${TABLE}.movie_id
+    hidden: true
 
   - dimension: note
     sql: ${TABLE}.note
@@ -17,18 +19,22 @@
   - dimension: nr_order
     type: int
     sql: ${TABLE}.nr_order
+    hidden: true
 
   - dimension: person_id
     type: int
     sql: ${TABLE}.person_id
+    hidden: true
 
   - dimension: person_role_id
     type: int
     sql: ${TABLE}.person_role_id
+    hidden: true
 
   - dimension: role_id
     type: int
     sql: ${TABLE}.role_id
+    hidden: true
     
   - dimension: role
     sql_case:

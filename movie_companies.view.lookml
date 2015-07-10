@@ -6,10 +6,12 @@
     primary_key: true
     type: int
     sql: ${TABLE}.id
+    hidden: true
 
   - dimension: company_id
     type: int
     sql: ${TABLE}.company_id
+    hidden: true
 
   - dimension: company_type_id
     type: int

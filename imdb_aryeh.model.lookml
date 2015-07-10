@@ -8,26 +8,40 @@
   view: title
   joins:
     - join: cast_info
+      view_label: Cast Member
       sql_on: ${title.id} = ${cast_info.movie_id}
       relationship: one_to_many
     - join: char_name
+      view_label: Cast Member
       sql_on: ${char_name.id} = ${cast_info.person_role_id}
       relationship: one_to_many
     - join: name
+      view_label: Cast Member
       sql_on: ${cast_info.person_id} = ${name.id}
       relationship: many_to_one
 
     - join: cast_info2
+      view_label: Cast Member 2
       from: cast_info
       sql_on: ${title.id} = ${cast_info2.movie_id}
       relationship: one_to_many
     - join: char_name2
+      view_label: Cast Member 2
       from: char_name
       sql_on: ${char_name2.id} = ${cast_info2.person_role_id}
       relationship: one_to_many
     - join: name2
+      view_label: Cast Member 2
       from: name
       sql_on: ${cast_info2.person_id} = ${name2.id}
+      relationship: many_to_one
+
+    - join: movie_companies
+      sql_on: ${title.id} = ${movie_companies.movie_id}
+      relationship: one_to_many
+    - join: company_name
+      view_label: Company
+      sql_on: ${movie_companies.company_id} = ${company_name.id}
       relationship: many_to_one
 
     - join: movie_keyword

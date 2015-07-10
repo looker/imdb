@@ -68,7 +68,7 @@
   - dimension: title
     sql: ${TABLE}.title
     html: |
-      {{ linked_value }} <a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=site:imdb.com+%22{{value}}+({{production_year._value}})%22">(search)</a>
+      {{ linked_value }} [<a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=site:imdb.com+%22{{value}}+({{production_year._value}})%22">&#x2139;</a>]
 
   - measure: count
     type: count

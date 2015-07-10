@@ -106,6 +106,10 @@
       relationship: many_to_one
       view_label: Title
       
+    - join: movie_budget
+      sql_on: ${title.id} = ${movie_budget.movie_id}
+      relationship: many_to_one
+      view_label: Title
       
 - explore: boxoffice_movie
   extends: title

@@ -39,7 +39,7 @@
       TV Movie: ${kind_id} = 3
       Video: ${kind_id} = 4
       Video Game: ${kind_id} = 6
-      TV Mini Series: ${kind_id} = 7
+      TV Series: ${kind_id} = 7
       All: true
 
   - dimension: is_box_office_movie

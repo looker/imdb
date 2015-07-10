@@ -6,6 +6,7 @@
 
 - explore: title
   view: title
+  extends: title_simple
   joins:
     - join: cast_info
       view_label: Cast Member
@@ -96,15 +97,19 @@
       sql_on: ${title.id} = ${us_boxoffice.movie_id}
       relationship: one_to_many
       
+- explore: boxoffice_movie
+  extends: title
+  always_filter:
+    title.is_box_office_movie: Yes
+
+# When joining in title, here are the joins you might want to use
+- explore: title_simple
+  extension: required
+  joins:
     - join: us_opening_weekend
       from: us_boxoffice
       sql_on: ${title.id} = ${us_opening_weekend.movie_id} and us_opening_weekend.weekend_number = 1
       fields: [us_opening_weekend.movie_id, us_opening_weekend.weekend_amount]
       relationship: many_to_one
- 
-- explore: boxoffice_movie
-  extends: title
-  always_filters:
-    title.is_box_office_movie: Yes
-
+  
 

@@ -1,4 +1,5 @@
 - explore: movie_info
+  extends: title_simple
   hidden: true
   joins:
   - join: title

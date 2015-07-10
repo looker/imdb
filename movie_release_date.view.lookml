@@ -1,9 +1,10 @@
-- explore: us_boxoffice
+
+- explore: movie_release_date
   extends: title_simple
   hidden: true
   joins:
   - join: title
-    sql_on: ${us_boxoffice.movie_id} = ${title.id}
+    sql_on: ${movie_release_date.movie_id} = ${title.id}
     relationship: many_to_one
 
 #
@@ -12,7 +13,7 @@
 #
 # There is a number for each weekend.
 # 
-- view: us_boxoffice
+- view: movie_release_date
   derived_table:
     persist_for: 100 hours
     sortkeys: [movie_id]

@@ -81,4 +81,5 @@
       from: us_boxoffice
       sql_on: ${title.id} = ${us_opening_weekend.movie_id} and us_opening_weekend.weekend_number = 1
       fields: [us_opening_weekend.movie_id, us_opening_weekend.weekend_amount]
+      relationship: many_to_one
  

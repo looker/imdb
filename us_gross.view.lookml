@@ -3,6 +3,7 @@
   joins:
   - join: title
     sql_on: ${us_boxoffice.movie_id} = ${title.id}
+    relationship: many_to_one
 
 #
 # Boxoffice data is stored as type 107.  The records we are interested in look like:

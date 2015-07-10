@@ -47,21 +47,40 @@
     - join: movie_keyword
       sql_on: ${title.id} = ${movie_keyword.movie_id}
       relationship: one_to_many
+
     - join: keyword
       sql_on: ${movie_keyword.keyword_id} = ${keyword.id}
       relationship: many_to_one
-    - join: movie_pornwords
-      foreign_key: title.id
+
+    - join: movie_keyword2
+      from: movie_keyword
+      sql_on: ${title.id} = ${movie_keyword2.movie_id}
+      relationship: one_to_many
+
+    - join: keyword2
+      from: keyword
+      sql_on: ${movie_keyword2.keyword_id} = ${keyword2.id}
+      relationship: many_to_one
+
+
     - join: movie_genre
       sql_on: ${title.id} = ${movie_genre.movie_id}
       relationship: one_to_many
+
     - join: movie_genre2
       from: movie_genre
       sql_on: ${title.id} = ${movie_genre2.movie_id}
       relationship: one_to_many
+      
     - join: movie_language
       sql_on: ${title.id} = ${movie_language.movie_id}
       relationship: one_to_many
+
+    - join: movie_language2
+      from: movie_language
+      sql_on: ${title.id} = ${movie_language2.movie_id}
+      relationship: one_to_many
+
     - join: movie_color
       sql_on: ${title.id} = ${movie_color.movie_id}
       relationship: one_to_many
@@ -83,3 +102,9 @@
       fields: [us_opening_weekend.movie_id, us_opening_weekend.weekend_amount]
       relationship: many_to_one
  
+- explore: boxoffice_movie
+  extends: title
+  always_filters:
+    title.is_box_office_movie: Yes
+
+

@@ -20,11 +20,12 @@
       SELECT 
         * 
         , ROW_NUMBER() OVER(ORDER BY movie_id, weekend_date) as id
-        , ROW_NUMBER() OVER(PARTITION BY movie_id ORDER BY weekend_date DESC) as weekend_number
+        , ROW_NUMBER() OVER(PARTITION BY movie_id ORDER BY weekend_date) as weekend_number
+        , amount_to_date - COALESCE(LAG(amount_to_date) OVER (PARTITION BY movie_id ORDER BY weekend_date),0) as weekend_amount
       FROM (
         SELECT 
           movie_id
-          , CAST(REPLACE(REPLACE(SPLIT_PART(info,' ',1),'$',''),',','') AS NUMERIC) / 1000000.0 as weekend_amount 
+          , CAST(REPLACE(REPLACE(SPLIT_PART(info,' ',1),'$',''),',','') AS NUMERIC) / 1000000.0 as amount_to_date 
           , info as info
           , TO_DATE(RTRIM(REGEXP_SUBSTR(info,'[^\(]*$'),1),'DD Month YYYY') as weekend_date
          

@@ -1,9 +1,9 @@
-- explore: us_boxoffice
+- explore: movie_weekend_revenue
   extends: title_simple
   hidden: true
   joins:
   - join: title
-    sql_on: ${us_boxoffice.movie_id} = ${title.id}
+    sql_on: ${movie_weekend_revenue.movie_id} = ${title.id}
     relationship: many_to_one
 
 #
@@ -12,7 +12,7 @@
 #
 # There is a number for each weekend.
 # 
-- view: us_boxoffice
+- view: movie_weekend_revenue
   derived_table:
     persist_for: 100 hours
     sortkeys: [movie_id]
@@ -28,7 +28,6 @@
           , CAST(REPLACE(REPLACE(SPLIT_PART(info,' ',1),'$',''),',','') AS NUMERIC) / 1000000.0 as amount_to_date 
           , info as info
           , TO_DATE(RTRIM(REGEXP_SUBSTR(info,'[^\(]*$'),1),'DD Month YYYY') as weekend_date
-         
         FROM public.movie_info AS movie_info
         WHERE 
           movie_info.info_type_id = 107
@@ -64,3 +63,55 @@
     type: average
     sql: ${weekend_amount}
     value_format: '$#,##0.00 \M'
+    
+- view: movie_revenue
+  derived_table:
+    persist_for: 100 hours
+    sortkeys: [movie_id]
+    sql: |
+      SELECT 
+        movie_id
+        , CAST(MAX(world_wide_rev) AS NUMERIC) / 1000000 as world_wide_revenue
+        , CAST(MAX(usa_rev) AS NUMERIC) / 1000000 as usa_revenue
+      FROM (
+        SELECT 
+          movie_id
+          , CASE WHEN info ~ '\\$[\\d\\,]* \\(Worldwide\\)$'
+              THEN REPLACE(REGEXP_SUBSTR(info,'[\\d\\,]+'),',','')
+              ELSE NULL
+            END AS world_wide_rev
+          , CASE WHEN info ~ '\\$[\\d\\,]* \\(USA\\)$'
+              THEN REPLACE(REGEXP_SUBSTR(info,'[\\d\\,]+'),',','')
+              ELSE NULL
+            END AS usa_rev
+            
+        FROM public.movie_info AS movie_info
+        WHERE 
+          movie_info.info_type_id = 107
+      ) AS BOO
+      GROUP BY 1
+      HAVING MAX(world_wide_rev) IS NOT NULL OR MAX(usa_rev) IS NOT NULL
+    
+  fields:
+  - dimension: movie_id
+    primary_key: true
+    hidden: true
+    
+  - dimension: world_wide_revenue
+    type: number
+    value_format: '$#,##0.00 \M'
+  
+  - dimension: usa_revenue
+    type: number
+    value_format: '$#,##0.00 \M'
+    
+  - dimension: revenue
+    type: number
+    sql: COALESCE(${world_wide_revenue}, ${usa_revenue})
+    value_format: '$#,##0.00 \M'
+    
+  - measure: total_revenue
+    type: sum
+    sql: ${revenue}
+    value_format: '$#,##0.00 \M'
+    

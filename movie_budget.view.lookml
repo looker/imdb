@@ -33,12 +33,12 @@
     type: number
     value_format: '#,##0.00 \M'
 
-  - dimension: total_budget
+  - measure: total_budget
     type: sum
     sql: ${budget}
     value_format: '#,##0.00 \M'
     
-  - dimension: average_budget
+  - measure: average_budget
     type: average
     sql: ${budget}
     value_format: '#,##0.00 \M'

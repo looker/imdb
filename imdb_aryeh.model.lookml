@@ -93,8 +93,8 @@
       sql_on: ${title.id} = ${movie_country_rating2.movie_id}
       relationship: one_to_many
       
-    - join: us_boxoffice
-      sql_on: ${title.id} = ${us_boxoffice.movie_id}
+    - join: movie_weekend_revenue
+      sql_on: ${title.id} = ${movie_weekend_revenue.movie_id}
       relationship: one_to_many
 
     - join: movie_release_dates
@@ -111,19 +111,16 @@
       relationship: many_to_one
       view_label: Title
       
-- explore: boxoffice_movie
-  extends: title
-  always_filter:
-    title.is_box_office_movie: Yes
-
+    - join: title_extra
+      view_label: Title
+      
 # When joining in title, here are the joins you might want to use
 - explore: title_simple
   extension: required
   joins:
-    - join: us_opening_weekend
-      from: us_boxoffice
-      sql_on: ${title.id} = ${us_opening_weekend.movie_id} and us_opening_weekend.weekend_number = 1
-      fields: [us_opening_weekend.movie_id, us_opening_weekend.weekend_amount]
+    - join: movie_revenue
+      sql_on: ${title.id} = ${movie_revenue.movie_id}
       relationship: many_to_one
-  
+      view_label: Title
+
 

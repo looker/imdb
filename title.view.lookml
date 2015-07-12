@@ -36,7 +36,8 @@
   extends: title_base
   fields:
 
-  - dimension: episode_nr
+  - dimension: episode_number
+    view_label: TV Episode
     type: int
     sql: ${TABLE}.episode_nr
     #hidden: true
@@ -68,13 +69,11 @@
     sql: ${TABLE}.phonetic_code
     hidden: true
     
-  - dimension: season_nr
+  - dimension: season_number
+    view_label: TV Episode
     type: int
     sql: ${TABLE}.season_nr
-    hidden: true
-    
-  - dimension: series_years
-    sql: ${TABLE}.series_years
+    #hidden: true
     
   - dimension: title
     sql: ${TABLE}.title
@@ -83,7 +82,30 @@
 
   - measure: count
     type: count
-    drill_fields: [SUPER*, kind]
+    drill_fields: [id, title, production_year, kind]
+
+  - measure: tv_episode_count
+    view_label: TV Episode
+    label: Count
+    type: count
+    filters:
+      kind: TV Episode
+    drill_fields: [tv_series.title, tv_series.series_years, id, title, production_year]
+
+  - measure: producton_year_count
+    type: count_distinct
+    sql: ${production_year}
+    drill_fields: [production_year, title.count]
+
+  - measure: producton_year_first
+    type: min
+    sql: ${production_year}
+
+  - measure: producton_year_last
+    type: max
+    sql: ${production_year}
+
+ 
     
 - view: tv_series
   extends: title_base
@@ -95,6 +117,10 @@
     html: |
       {{ linked_value }} [<a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=site:imdb.com+%22{{value}}+({{production_year._value}})%22">&#x2139;</a>]
   
+  - dimension: series_years
+    sql: ${TABLE}.series_years
+    
+
     
 - view: title_extra
   fields:

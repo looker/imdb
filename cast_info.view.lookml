@@ -38,8 +38,7 @@
     
   - dimension: role
     sql_case:
-      Actor (uncredited): ${role_id} = 1
-      Actor: ${role_id} = 2
+      Actor: ${role_id} IN (1, 2)
       Producer: ${role_id} = 3
       Writer: ${role_id} = 4
       Director of Photography: ${role_id} = 5

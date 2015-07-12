@@ -12,14 +12,17 @@
       view_label: Cast Member
       sql_on: ${title.id} = ${cast_info.movie_id}
       relationship: one_to_many
+      
     - join: char_name
       view_label: Cast Member
       sql_on: ${char_name.id} = ${cast_info.person_role_id}
       relationship: one_to_many
+      
     - join: name
       view_label: Cast Member
       sql_on: ${cast_info.person_id} = ${name.id}
       relationship: many_to_one
+      
     - join: cast_title_facts
       view_label: Cast Member
       sql_on: ${cast_info.person_id} = ${cast_title_facts.person_id}
@@ -29,19 +32,20 @@
       view_label: Cast Member
       sql_on: ${cast_info.person_id} = ${cast_top_genre.person_id}
       relationship: many_to_one
-
-
+      
     - join: cast_info2
       view_label: Cast Member 2
       from: cast_info
       sql_on: ${title.id} = ${cast_info2.movie_id}
       relationship: one_to_many
     - join: char_name2
+    
       view_label: Cast Member 2
       from: char_name
       sql_on: ${char_name2.id} = ${cast_info2.person_role_id}
       relationship: one_to_many
     - join: name2
+    
       view_label: Cast Member 2
       from: name
       sql_on: ${cast_info2.person_id} = ${name2.id}
@@ -50,6 +54,7 @@
     - join: movie_companies
       sql_on: ${title.id} = ${movie_companies.movie_id}
       relationship: one_to_many
+      
     - join: company_name
       view_label: Company
       sql_on: ${movie_companies.company_id} = ${company_name.id}
@@ -77,6 +82,11 @@
     - join: movie_genre
       sql_on: ${title.id} = ${movie_genre.movie_id}
       relationship: one_to_many
+      
+    - join: movie_is_genre
+      view_label: Movie Genre
+      sql_on: ${title.id} = ${movie_is_genre.movie_id}
+      relationship: one_to_many
 
     - join: movie_genre2
       from: movie_genre
@@ -95,9 +105,11 @@
     - join: movie_color
       sql_on: ${title.id} = ${movie_color.movie_id}
       relationship: one_to_many
+      
     - join: movie_country_rating
       sql_on: ${title.id} = ${movie_country_rating.movie_id}
       relationship: one_to_many
+      
     - join: movie_country_rating2
       from: movie_country_rating
       sql_on: ${title.id} = ${movie_country_rating2.movie_id}

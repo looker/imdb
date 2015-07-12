@@ -20,6 +20,10 @@
       view_label: Cast Member
       sql_on: ${cast_info.person_id} = ${name.id}
       relationship: many_to_one
+    - join: cast_title_facts
+      view_label: Cast Member
+      sql_on: ${cast_info.person_id} = ${cast_title_facts.person_id}
+      relationship: many_to_one
 
     - join: cast_info2
       view_label: Cast Member 2

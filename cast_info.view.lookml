@@ -52,7 +52,7 @@
       12: ${role_id} = 12
       
 
-  - measure: count
+  - measure: person_in_role_count
     type: count
     drill_fields: [id]
 

@@ -38,4 +38,8 @@
   - dimension: surname_pcode
     sql: ${TABLE}.surname_pcode
     hidden: true
+    
+  - measure: person_count
+    type: count
+    drill_fields: [id, name, gender, title.count]
 

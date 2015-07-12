@@ -1,22 +1,11 @@
-- view: title
+- view: title_base
   sql_table_name: public.title
   fields:
-
   - dimension: id
     primary_key: true
     type: int
     sql: ${TABLE}.id
-
-  - dimension: episode_nr
-    type: int
-    sql: ${TABLE}.episode_nr
-    hidden: true
-    
-  - dimension: episode_of_id
-    type: int
-    sql: ${TABLE}.episode_of_id
-    hidden: true
-    
+  
   - dimension: imdb_id
     type: int
     sql: ${TABLE}.imdb_id
@@ -30,6 +19,32 @@
     type: int
     sql: ${TABLE}.kind_id
     hidden: true
+
+  - dimension: title
+    sql: ${TABLE}.title
+
+  - dimension: production_year
+    type: int
+    sql: ${TABLE}.production_year
+
+  - measure: count
+    type: count
+    drill_fields: [id, title, production_year]
+
+
+- view: title
+  extends: title_base
+  fields:
+
+  - dimension: episode_nr
+    type: int
+    sql: ${TABLE}.episode_nr
+    #hidden: true
+    
+  - dimension: episode_of_id
+    type: int
+    sql: ${TABLE}.episode_of_id
+    #hidden: true
     
   - dimension: kind
     sql_case:
@@ -38,8 +53,8 @@
       TV Movie: ${kind_id} = 3
       Video: ${kind_id} = 4
       Video Game: ${kind_id} = 6
-      TV Series: ${kind_id} = 7
-      All: true
+      TV Episode: ${kind_id} = 7
+      Other: true
 
   - dimension: is_box_office_movie
     type: yesno
@@ -53,10 +68,6 @@
     sql: ${TABLE}.phonetic_code
     hidden: true
     
-  - dimension: production_year
-    type: int
-    sql: ${TABLE}.production_year
-
   - dimension: season_nr
     type: int
     sql: ${TABLE}.season_nr
@@ -72,8 +83,18 @@
 
   - measure: count
     type: count
-    drill_fields: [id, title, kind, production_year]
+    drill_fields: [SUPER*, kind]
     
+- view: tv_series
+  extends: title_base
+  fields:
+  - dimension: series_years
+    sql: ${TABLE}.series_years
+    
+  - dimension: title
+    html: |
+      {{ linked_value }} [<a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=site:imdb.com+%22{{value}}+({{production_year._value}})%22">&#x2139;</a>]
+  
     
 - view: title_extra
   fields:

@@ -3,10 +3,10 @@
   fields:
 
   - dimension: id
+    label: Person ID
     primary_key: true
     type: int
     sql: ${TABLE}.id
-    hidden: true
 
   - dimension: gender
     sql: ${TABLE}.gender

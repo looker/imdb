@@ -131,6 +131,11 @@
     - join: title_extra
       view_label: Title
       
+    - join: tv_series
+      view_label: TV Series
+      sql_on: ${title.episode_of_id} = ${tv_series.id}
+  
+      
 # When joining in title, here are the joins you might want to use
 - explore: title_simple
   extension: required

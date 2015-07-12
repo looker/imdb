@@ -39,14 +39,33 @@
     type: number
     description: number of different years with titles
     
+  - measure: average_years_with_titles
+    type: average
+    sql: ${years_with_titles}
+    description: number of different years with titles
+    decimals: 2
+    
   - dimension: years_worked
     type: number
     sql: ${last_production_year} - ${first_production_year} + 1
     description: Difference between first production year and last production year +1
-    
+
+  - measure: average_years_worked
+    type: average
+    sql: ${years_worked}
+    description: Difference between first production year and last production year +1
+    decimals: 2
+
   - dimension: years_acted
     type: number
     description: number of distinct production years where the role was acting
+
+  - measure: average_years_acted
+    type: average
+    sql: ${years_acted}
+    description: number of distinct production years where the role was acting
+    decimals: 2
+
     
 - view: cast_top_genre
   derived_table:

@@ -64,20 +64,15 @@
       sql_on: ${title.id} = ${movie_keyword.movie_id}
       relationship: one_to_many
 
-    - join: keyword
-      sql_on: ${movie_keyword.keyword_id} = ${keyword.id}
-      relationship: many_to_one
+    - join: movie_has_keyword
+      view_label: Movie Keyword
+      sql_on: ${title.id} = ${movie_has_keyword.movie_id}
+      relationship: one_to_many
 
     - join: movie_keyword2
       from: movie_keyword
       sql_on: ${title.id} = ${movie_keyword2.movie_id}
       relationship: one_to_many
-
-    - join: keyword2
-      from: keyword
-      sql_on: ${movie_keyword2.keyword_id} = ${keyword2.id}
-      relationship: many_to_one
-
 
     - join: movie_genre
       sql_on: ${title.id} = ${movie_genre.movie_id}

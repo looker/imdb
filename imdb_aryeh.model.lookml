@@ -134,6 +134,7 @@
     - join: tv_series
       view_label: TV Series
       sql_on: ${title.episode_of_id} = ${tv_series.id}
+      relationship: many_to_one
   
       
 # When joining in title, here are the joins you might want to use

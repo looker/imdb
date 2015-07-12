@@ -25,6 +25,12 @@
       sql_on: ${cast_info.person_id} = ${cast_title_facts.person_id}
       relationship: many_to_one
 
+    - join: cast_top_genre
+      view_label: Cast Member
+      sql_on: ${cast_info.person_id} = ${cast_top_genre.person_id}
+      relationship: many_to_one
+
+
     - join: cast_info2
       view_label: Cast Member 2
       from: cast_info

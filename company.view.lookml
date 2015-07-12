@@ -1,4 +1,4 @@
-- view: company_name
+- view: company
   sql_table_name: public.company_name
   fields:
 

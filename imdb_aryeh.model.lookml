@@ -38,8 +38,8 @@
       from: cast_info
       sql_on: ${title.id} = ${cast_info2.movie_id}
       relationship: one_to_many
+      
     - join: char_name2
-    
       view_label: Cast Member 2
       from: char_name
       sql_on: ${char_name2.id} = ${cast_info2.person_role_id}
@@ -55,10 +55,20 @@
       sql_on: ${title.id} = ${movie_companies.movie_id}
       relationship: one_to_many
       
-    - join: company_name
-      view_label: Company
-      sql_on: ${movie_companies.company_id} = ${company_name.id}
+    - join: company
+      sql_on: ${movie_companies.company_id} = ${company.id}
       relationship: many_to_one
+
+    - join: movie_companies2
+      from: movie_companies
+      sql_on: ${title.id} = ${movie_companies2.movie_id}
+      relationship: one_to_many
+      
+    - join: company_2
+      from: company
+      sql_on: ${movie_companies2.company_id} = ${company_2.id}
+      relationship: many_to_one
+
 
     - join: movie_keyword
       sql_on: ${title.id} = ${movie_keyword.movie_id}
@@ -127,6 +137,12 @@
       sql_on: ${title.id} = ${movie_budget.movie_id}
       relationship: many_to_one
       view_label: Title
+      
+    - join: title_location
+      sql_on: ${title.id} = ${title_location.movie_id}
+      relationship: one_to_many
+      view_label: Title
+
       
     - join: title_extra
       view_label: Title

@@ -27,4 +27,4 @@ Start **[Exploring at the IMDB:Title Explorer](/explore/imdb/title)** and see if
 
 * What two **genres** most co-occur? (Hint: you can group by more than one **genre**)
 
-* What **titles** have had a **creation location** in Santa Cruz, California? (Hint: you may have to use a **contains** filter on a **location**).
+* What **titles** have had a **creation location** in Santa Cruz, California? (Hint: you may have to use a **contains** filter on a **location**.  You may have to set another filter too, because there is a Santa Cruz in Mexico).

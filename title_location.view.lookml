@@ -5,8 +5,8 @@
     sql: |
       SELECT 
         movie_id
-        , movie_info.info AS creation_full_location
-        , TRIM(REGEXP_SUBSTR(movie_info.info,'[A-z\\s]+$')) as creation_country_location
+        , movie_info.info AS creation_location_full
+        , TRIM(REGEXP_SUBSTR(movie_info.info,'[A-z\\s]+$')) as creation_location_country
       FROM public.movie_info AS movie_info
       WHERE movie_info.info_type_id = 18
       
@@ -14,5 +14,5 @@
   - dimension: movie_id
     hidden: true
     
-  - dimension: creation_full_location
-  - dimension: creation_country_location
+  - dimension: creation_location_full
+  - dimension: creation_location_country

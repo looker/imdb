@@ -107,7 +107,7 @@
     type: number
     
   - dimension: usa_premiere
-    label: USA Premiere
+    label: Had USA Premiere
     type: yesno
     sql: ${TABLE}.usa_premiere = 1
     

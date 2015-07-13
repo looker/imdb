@@ -16,6 +16,12 @@ Start **[Exploring at the IMDB:Title Explorer](/explore/imdb/title)** and see if
 
 * What **company** has made the most **TV Episodes**?
 
+* What **Person** has appeared in the most **TV Episodes**?
+
+* What **TV Series Title** has the most **TV Episodes**;
+
+* What **Person** has appeared most ofthen on the **TV Series Title**d 'Late Show with David Letterman? (Hint: even a guest is a Cast Member with the Role/Job **Actor**)
+
 
 ### More Advanced Puzzles
 

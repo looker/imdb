@@ -97,16 +97,21 @@
     primary_key: true
     hidden: true
     
+  # Hide these because they are confusing.
+  
   - dimension: world_wide_revenue
     type: number
+    hidden: true
     value_format: '$#,##0.00 \M'
   
   - dimension: usa_revenue
     type: number
+    hidden: true
     value_format: '$#,##0.00 \M'
     
   - dimension: revenue
     type: number
+    hidden: true
     sql: COALESCE(${world_wide_revenue}, ${usa_revenue})
     value_format: '$#,##0.00 \M'
     

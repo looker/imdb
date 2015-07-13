@@ -37,6 +37,7 @@
     hidden: true
     
   - dimension: role
+    label: Role (Job they performed)
     sql_case:
       Actor: ${role_id} IN (1, 2)
       Producer: ${role_id} = 3
@@ -53,5 +54,5 @@
 
   - measure: person_in_role_count
     type: count
-    drill_fields: [id]
+    drill_fields: [id, name.person_name, role]
 

@@ -47,7 +47,7 @@
     sql: ${TABLE}.episode_of_id
     #hidden: true
     
-  - dimension: kind
+  - dimension: kind_of_title
     sql_case:
       Movie: ${kind_id} = 1
       TV Show: ${kind_id} = 2
@@ -89,7 +89,7 @@
     label: Count
     type: count
     filters:
-      kind: TV Episode
+      kind_of_title: TV Episode
     drill_fields: [tv_series.title, tv_series.series_years, id, title, production_year]
 
   - measure: producton_year_count

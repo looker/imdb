@@ -24,7 +24,7 @@
     sql: ${TABLE}.md5sum
     hidden: true
 
-  - dimension: name
+  - dimension: person_name
     sql: ${TABLE}.name
 
   - dimension: name_pcode_cf

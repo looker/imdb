@@ -1,3 +1,10 @@
+- explore: person_info
+  hidden: true
+  joins:
+  - join: name
+    sql_on: ${person_info.person_id} = ${name.id}
+    relationship: many_to_one
+
 - view: person_info
   sql_table_name: public.person_info
   fields:

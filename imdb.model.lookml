@@ -6,6 +6,7 @@
 
 - explore: title
   view: title
+  sql_always_where: ${title.kind_id} <> 2 
   extends: title_simple
   joins:
     - join: cast_info
@@ -56,6 +57,7 @@
       relationship: one_to_many
       
     - join: company
+      view_label: Production Company
       sql_on: ${movie_companies.company_id} = ${company.id}
       relationship: many_to_one
 
@@ -66,43 +68,50 @@
       
     - join: company_2
       from: company
+      view_label: Production Company 2
       sql_on: ${movie_companies2.company_id} = ${company_2.id}
       relationship: many_to_one
 
 
     - join: movie_keyword
+      view_label: Title Keyword
       sql_on: ${title.id} = ${movie_keyword.movie_id}
       relationship: one_to_many
 
     - join: movie_has_keyword
-      view_label: Movie Keyword
+      view_label: Title Keyword
       sql_on: ${title.id} = ${movie_has_keyword.movie_id}
       relationship: one_to_many
 
-    - join: movie_keyword2
+    - join: movie_keyword_2
+      view_label: Title Keyword 2
       from: movie_keyword
-      sql_on: ${title.id} = ${movie_keyword2.movie_id}
+      sql_on: ${title.id} = ${movie_keyword_2.movie_id}
       relationship: one_to_many
 
     - join: movie_genre
+      view_label: Title Genre
       sql_on: ${title.id} = ${movie_genre.movie_id}
       relationship: one_to_many
       
     - join: movie_is_genre
-      view_label: Movie Genre
+      view_label: Title Genre
       sql_on: ${title.id} = ${movie_is_genre.movie_id}
       relationship: one_to_many
 
     - join: movie_genre2
+      view_label: Title Genre 2
       from: movie_genre
       sql_on: ${title.id} = ${movie_genre2.movie_id}
       relationship: one_to_many
       
     - join: movie_language
+      view_label: Title Has Language
       sql_on: ${title.id} = ${movie_language.movie_id}
       relationship: one_to_many
 
     - join: movie_language2
+      view_label: Title Has Language 2
       from: movie_language
       sql_on: ${title.id} = ${movie_language2.movie_id}
       relationship: one_to_many
@@ -112,10 +121,12 @@
       relationship: one_to_many
       
     - join: movie_country_rating
+      view_label: Title Rating
       sql_on: ${title.id} = ${movie_country_rating.movie_id}
       relationship: one_to_many
       
     - join: movie_country_rating2
+      view_label: Title Rating 2
       from: movie_country_rating
       sql_on: ${title.id} = ${movie_country_rating2.movie_id}
       relationship: one_to_many
@@ -125,6 +136,7 @@
       relationship: one_to_many
 
     - join: movie_release_dates
+      view_label: Title Release Dates
       sql_on: ${title.id} = ${movie_release_dates.movie_id}
       relationship: one_to_many
       
@@ -143,12 +155,11 @@
       relationship: one_to_many
       view_label: Title
 
-      
     - join: title_extra
       view_label: Title
       
     - join: tv_series
-      view_label: TV Series
+      view_label: TV Episode
       sql_on: ${title.episode_of_id} = ${tv_series.id}
       relationship: many_to_one
   

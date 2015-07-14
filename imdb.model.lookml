@@ -35,19 +35,19 @@
       relationship: many_to_one
       
     - join: cast_info2
-      view_label: Cast Member 2
+      view_label: Cast Member (also in Title)
       from: cast_info
       sql_on: ${title.id} = ${cast_info2.movie_id}
       relationship: one_to_many
       
     - join: char_name2
-      view_label: Cast Member 2
+      view_label: Cast Member (also in Title)
       from: char_name
       sql_on: ${char_name2.id} = ${cast_info2.person_role_id}
       relationship: one_to_many
+
     - join: name2
-    
-      view_label: Cast Member 2
+      view_label: Cast Member  (also in Title)
       from: name
       sql_on: ${cast_info2.person_id} = ${name2.id}
       relationship: many_to_one
@@ -68,7 +68,7 @@
       
     - join: company_2
       from: company
-      view_label: Production Company 2
+      view_label: Production Company (also in Title)
       sql_on: ${movie_companies2.company_id} = ${company_2.id}
       relationship: many_to_one
 
@@ -84,7 +84,7 @@
       relationship: one_to_many
 
     - join: movie_keyword_2
-      view_label: Title Keyword 2
+      view_label: Title Keyword (also in Title)
       from: movie_keyword
       sql_on: ${title.id} = ${movie_keyword_2.movie_id}
       relationship: one_to_many
@@ -100,7 +100,7 @@
       relationship: one_to_many
 
     - join: movie_genre2
-      view_label: Title Genre 2
+      view_label: Title Genre (also in Title)
       from: movie_genre
       sql_on: ${title.id} = ${movie_genre2.movie_id}
       relationship: one_to_many
@@ -111,12 +111,13 @@
       relationship: one_to_many
 
     - join: movie_language2
-      view_label: Title Has Language 2
+      view_label: Title Has Language (also in Title)
       from: movie_language
       sql_on: ${title.id} = ${movie_language2.movie_id}
       relationship: one_to_many
 
     - join: movie_color
+      view_label: Title
       sql_on: ${title.id} = ${movie_color.movie_id}
       relationship: one_to_many
       
@@ -126,7 +127,7 @@
       relationship: one_to_many
       
     - join: movie_country_rating2
-      view_label: Title Rating 2
+      view_label: Title Rating (also in Title)
       from: movie_country_rating
       sql_on: ${title.id} = ${movie_country_rating2.movie_id}
       relationship: one_to_many

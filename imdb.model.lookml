@@ -6,7 +6,7 @@
 
 - explore: title
   view: title
-  sql_always_where: ${title.kind_id} <> 2 
+  #sql_always_where: ${title.kind_id} <> 2 
   extends: title_simple
   joins:
     - join: cast_info

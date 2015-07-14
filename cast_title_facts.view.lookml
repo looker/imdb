@@ -21,6 +21,7 @@
     primary_key: true
     
   - dimension: lifetime_titles
+    label: Lifetime Number Titles (in which they worked)
     type: number
     
   - dimension: lifetime_titles_tiered
@@ -30,37 +31,45 @@
     sql: ${lifetime_titles}
     
   - dimension: first_production_year
+    label: First Production Year (in which they worked)
     type: number
     
   - dimension: last_production_year
+    label: Last Production Year (in which they worked)
     type: number
     
   - dimension: years_with_titles
+    label: Number of Unique Production Years (in which they worked)
     type: number
     description: number of different years with titles
     
   - measure: average_years_with_titles
+    label: Average Number of Unique Production Years (in which they worked)
     type: average
     sql: ${years_with_titles}
     description: number of different years with titles
     decimals: 2
     
   - dimension: years_worked
+    label: Years Between the First Year they worked and the Last
     type: number
     sql: ${last_production_year} - ${first_production_year} + 1
     description: Difference between first production year and last production year +1
 
   - measure: average_years_worked
+    label: Average Number of Years Between the First Year they worked and the Last
     type: average
     sql: ${years_worked}
     description: Difference between first production year and last production year +1
     decimals: 2
 
   - dimension: years_acted
+    label: Number of Unique Production Years where the Job was Acting (in which they worked)
     type: number
     description: number of distinct production years where the role was acting
 
   - measure: average_years_acted
+    label: Average Number of Unique Production Years where the Job was Acting (in which they worked)
     type: average
     sql: ${years_acted}
     description: number of distinct production years where the role was acting

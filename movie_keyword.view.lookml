@@ -14,6 +14,7 @@
 
   - dimension: id
     primary_key: true
+    hidden: true
     type: int
     sql: ${TABLE}.id
 
@@ -21,6 +22,7 @@
   
   - dimension: movie_id
     type: int
+    hidden: true
     sql: ${TABLE}.movie_id
 
   - measure: keyword_count

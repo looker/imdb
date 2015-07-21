@@ -17,6 +17,7 @@
   
   - measure: genre_list
     type: list
+    hidden: true        # Redshift doesn't support this.
     list_field: genre
 
 - view: movie_is_genre

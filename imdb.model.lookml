@@ -47,7 +47,7 @@
       relationship: one_to_many
 
     - join: name2
-      view_label: Cast Member  (also in Title)
+      view_label: Cast Member (also in Title)
       from: name
       sql_on: ${cast_info2.person_id} = ${name2.id}
       relationship: many_to_one
@@ -78,10 +78,10 @@
       sql_on: ${title.id} = ${movie_keyword.movie_id}
       relationship: one_to_many
 
-    - join: movie_has_keyword
-      view_label: Title Keyword
-      sql_on: ${title.id} = ${movie_has_keyword.movie_id}
-      relationship: one_to_many
+#     - join: movie_has_keyword
+#       view_label: Title Keyword
+#       sql_on: ${title.id} = ${movie_has_keyword.movie_id}
+#       relationship: one_to_many
 
     - join: movie_keyword_2
       view_label: Title Keyword (also in Title)
@@ -94,10 +94,10 @@
       sql_on: ${title.id} = ${movie_genre.movie_id}
       relationship: one_to_many
       
-    - join: movie_is_genre
-      view_label: Title Genre
-      sql_on: ${title.id} = ${movie_is_genre.movie_id}
-      relationship: one_to_many
+#     - join: movie_is_genre
+#       view_label: Title Genre
+#       sql_on: ${title.id} = ${movie_is_genre.movie_id}
+#       relationship: one_to_many
 
     - join: movie_genre2
       view_label: Title Genre (also in Title)

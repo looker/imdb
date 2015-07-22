@@ -1,5 +1,13 @@
 - view: name
-  sql_table_name: public.name
+  derived_table:
+    persist_for: 500 hours
+    sortkeys: [id]
+    sql: |
+      SELECT 
+        *
+        , SPLIT_PART(name.name, ', ', 2) || ' ' || SPLIT_PART(name.name, ', ', 1)  AS person_name
+      FROM public.name
+      
   fields:
 
   - dimension: id
@@ -25,7 +33,7 @@
     hidden: true
 
   - dimension: person_name
-    sql: ${TABLE}.name
+    sql: ${TABLE}.person_name
 
   - dimension: name_pcode_cf
     sql: ${TABLE}.name_pcode_cf
@@ -41,5 +49,5 @@
     
   - measure: person_count
     type: count
-    drill_fields: [id, name, gender, title.count]
+    drill_fields: [id, person_name, gender, title.count]
 

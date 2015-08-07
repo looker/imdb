@@ -29,7 +29,7 @@
 
   - measure: count
     type: count
-    drill_fields: [id, title, production_year]
+    drill_fields: [id, kind_of_title, title, production_year]
 
 
 - view: title
@@ -82,7 +82,7 @@
 
   - measure: count
     type: count
-    drill_fields: [id, title, production_year, kind]
+    drill_fields: [id, kind_of_title, title, production_year]
 
   - measure: tv_episode_count
     view_label: TV Episode

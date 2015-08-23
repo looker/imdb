@@ -9,7 +9,7 @@
 - view: movie_budget
   derived_table:
     persist_for: 100 hours
-    sortkeys: [movie_id]
+    indexes: [movie_id]
     sql: |
       SELECT 
         movie_id

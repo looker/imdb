@@ -28,6 +28,8 @@
       type: inner
     - join: name2
       type: inner
+    - join: tv_series
+      type: inner
 
 #     - join: movie_companies
 #       sql_on: ${title.id} = ${movie_companies.movie_id}

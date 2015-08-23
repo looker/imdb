@@ -4,8 +4,12 @@
     indexes: [id]
     sql: |
       SELECT 
-        *
-        , SPLIT_PART(name.name, ', ', 2) || ' ' || SPLIT_PART(name.name, ', ', 1)  AS person_name
+        * 
+        , {% if _dialect._name contains 'spark' %}
+            CONCAT(SPLIT(name.name, ', ')[1], ' ', SPLIT(name.name, ', ')[0])
+          {% else %}
+            SPLIT_PART(name.name, ', ', 2) || ' ' || SPLIT_PART(name.name, ', ', 1)  
+          {% endif %} AS person_name
       FROM name
       
   fields:

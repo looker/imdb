@@ -8,7 +8,6 @@
 
 
 - view: movie_info
-  sql_table_name: public.movie_info
   fields:
 
   - dimension: id

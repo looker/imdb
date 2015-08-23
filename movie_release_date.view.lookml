@@ -31,7 +31,7 @@
                 THEN TO_DATE( SPLIT_PART(info,':',2), 'YYYY')
               ELSE NULL
             END as release_date
-        FROM public.movie_info AS movie_info
+        FROM movie_info
         WHERE 
           movie_info.info_type_id = 16
       ) AS BOO

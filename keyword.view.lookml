@@ -1,5 +1,4 @@
 - view: keyword
-  sql_table_name: public.keyword
   fields:
 
   - dimension: id

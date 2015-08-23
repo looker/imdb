@@ -6,7 +6,6 @@
     relationship: many_to_one
 
 - view: person_info
-  sql_table_name: public.person_info
   fields:
 
   - dimension: id

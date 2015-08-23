@@ -1,5 +1,4 @@
 - view: movie_info_idx
-  sql_table_name: public.movie_info_idx
   fields:
 
   - dimension: id

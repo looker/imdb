@@ -1,5 +1,4 @@
 - view: aka_title
-  sql_table_name: public.aka_title
   fields:
 
   - dimension: id

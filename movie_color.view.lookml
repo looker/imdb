@@ -6,7 +6,7 @@
       SELECT 
         movie_id
         , movie_info.info AS color
-      FROM public.movie_info AS movie_info
+      FROM movie_info AS movie_info
       WHERE movie_info.info_type_id = 2
       
   fields:

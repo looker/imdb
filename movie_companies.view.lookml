@@ -1,5 +1,4 @@
 - view: movie_companies
-  sql_table_name: public.movie_companies
   fields:
 
   - dimension: id

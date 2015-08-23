@@ -16,7 +16,7 @@
         , REGEXP_SUBSTR(info,'^[^\\d\\s]*') as budget_currency
         , CAST(NULLIF(REGEXP_REPLACE(info, '[^\\d]'),'') AS NUMERIC)/1000000 as budget
         , ROW_NUMBER() OVER(ORDER BY movie_id) as id
-      FROM public.movie_info AS movie_info
+      FROM movie_info AS movie_info
       WHERE movie_info.info_type_id = 105 
       
   fields:

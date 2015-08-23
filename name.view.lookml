@@ -6,7 +6,7 @@
       SELECT 
         *
         , SPLIT_PART(name.name, ', ', 2) || ' ' || SPLIT_PART(name.name, ', ', 1)  AS person_name
-      FROM public.name
+      FROM name
       
   fields:
 

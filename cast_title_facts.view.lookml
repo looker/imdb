@@ -18,7 +18,7 @@
         , COUNT(DISTINCT CASE WHEN cast_info.role_id IN (4) THEN title.id ELSE NULL END) AS lifetime_titles_as_writer
         , COUNT(DISTINCT CASE WHEN cast_info.role_id IN (8) THEN title.id ELSE NULL END) AS lifetime_titles_directed
 
-      FROM public.title AS title
+      FROM title AS title
       LEFT JOIN  cast_info ON title.id = cast_info.movie_id
       LEFT JOIN  name ON cast_info.person_id = name.id
       LEFT JOIN ${movie_revenue.SQL_TABLE_NAME} AS movie_revenue ON title.id = movie_revenue.movie_id

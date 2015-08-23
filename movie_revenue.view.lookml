@@ -105,7 +105,7 @@
               ELSE NULL
             END AS usa_rev
             
-        FROM public.movie_info AS movie_info
+        FROM movie_info AS movie_info
         WHERE 
           movie_info.info_type_id = 107
       ) AS BOO

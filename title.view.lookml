@@ -108,7 +108,7 @@
  
     
 - view: tv_series
-  sql_table_name: public.title
+  sql_table_name: title
   fields:
   - dimension: id
     label: TV Series ID

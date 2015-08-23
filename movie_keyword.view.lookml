@@ -7,8 +7,8 @@
         movie_id
         , keyword
         , ROW_NUMBER() OVER (order by movie_id) as id
-      FROM public.movie_keyword AS mk
-      JOIN public.keyword AS k ON mk.keyword_id = k.id
+      FROM movie_keyword AS mk
+      JOIN keyword AS k ON mk.keyword_id = k.id
 
   fields:
 

@@ -1,5 +1,4 @@
 - view: movie_link
-  sql_table_name: public.movie_link
   fields:
 
   - dimension: id

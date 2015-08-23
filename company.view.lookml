@@ -1,5 +1,4 @@
 - view: company
-  sql_table_name: public.company_name
   fields:
 
   - dimension: id

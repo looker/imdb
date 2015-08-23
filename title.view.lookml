@@ -1,5 +1,5 @@
 - view: title_base
-  sql_table_name: public.title
+  sql_table_name: title
   fields:
   - dimension: id
     primary_key: true

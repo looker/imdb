@@ -19,8 +19,8 @@
         , COUNT(DISTINCT CASE WHEN cast_info.role_id IN (8) THEN title.id ELSE NULL END) AS lifetime_titles_directed
 
       FROM public.title AS title
-      LEFT JOIN public.cast_info AS cast_info ON title.id = cast_info.movie_id
-      LEFT JOIN public.name AS name ON cast_info.person_id = name.id
+      LEFT JOIN  cast_info ON title.id = cast_info.movie_id
+      LEFT JOIN  name ON cast_info.person_id = name.id
       LEFT JOIN ${movie_revenue.SQL_TABLE_NAME} AS movie_revenue ON title.id = movie_revenue.movie_id
       GROUP BY 1
   fields:
@@ -146,8 +146,8 @@
           , genre.genre as genre
           , COUNT(*) AS num_titles
           , ROW_NUMBER() OVER(PARTITION BY person_id ORDER BY num_titles DESC) as genre_rank
-        FROM public.title AS title
-        LEFT JOIN public.cast_info AS cast_info ON title.id = cast_info.movie_id
+        FROM title 
+        LEFT JOIN cast_info AS cast_info ON title.id = cast_info.movie_id
         LEFT JOIN ${movie_genre.SQL_TABLE_NAME} AS genre ON title.id = genre.movie_id
         GROUP BY 1,2
       ) AS BOO

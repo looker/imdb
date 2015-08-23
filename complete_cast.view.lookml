@@ -1,5 +1,4 @@
 - view: complete_cast
-  sql_table_name: public.complete_cast
   fields:
 
   - dimension: id

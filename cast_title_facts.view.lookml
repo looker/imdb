@@ -1,7 +1,7 @@
 - view: cast_title_facts
   derived_table:
     persist_for: 100 hours
-    sortkeys: [person_id]
+    indexes: [person_id]
     sql: |
       SELECT
         cast_info.person_id as person_id
@@ -135,7 +135,7 @@
 - view: cast_top_genre
   derived_table:
     persist_for: 100 hours
-    sortkeys: [person_id]
+    indexes: [person_id]
     sql: |
       SELECT
         person_id

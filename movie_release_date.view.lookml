@@ -10,7 +10,7 @@
 - view: movie_release_dates
   derived_table:
     persist_for: 100 hours
-    sortkeys: [movie_id]
+    indexes: [movie_id]
     sql: |
       SELECT 
         * 
@@ -77,7 +77,7 @@
 - view: movie_release_facts
   derived_table:
     persist_for: 100 hours
-    sortkeys: [movie_id]
+    indexes: [movie_id]
     sql: |
       SELECT
         movie_id

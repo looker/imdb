@@ -1,7 +1,7 @@
 - view: name
   derived_table:
     persist_for: 500 hours
-    sortkeys: [id]
+    indexes: [id]
     sql: |
       SELECT 
         *
@@ -50,4 +50,3 @@
   - measure: person_count
     type: count
     drill_fields: [id, person_name, gender, title.count]
-

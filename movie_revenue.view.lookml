@@ -15,7 +15,7 @@
 - view: movie_weekend_revenue
   derived_table:
     persist_for: 100 hours
-    sortkeys: [movie_id]
+    indexes: [movie_id]
     sql: |
       SELECT 
         * 
@@ -67,7 +67,7 @@
 - view: movie_revenue
   derived_table:
     persist_for: 100 hours
-    sortkeys: [movie_id]
+    indexes: [movie_id]
     sql: |
       SELECT 
         movie_id

@@ -1,4 +1,4 @@
-# Redshift implementation of IMDB
+# Spark implementation of IMDB
 
 - connection: spark_imdb
 

@@ -86,31 +86,14 @@
     
 - view: movie_revenue
   derived_table:
-    persist_for: 100 hours
-    indexes: [movie_id]
+    #persist_for: 100 hours
+    #indexes: [movie_id]
     sql: |
       SELECT 
-        movie_id
-        , CAST(MAX(world_wide_rev) AS NUMERIC) / 1000000 as world_wide_revenue
-        , CAST(MAX(usa_rev) AS NUMERIC) / 1000000 as usa_revenue
-      FROM (
-        SELECT 
-          movie_id
-          , CASE WHEN info ~ '\\$[\\d\\,]* \\(Worldwide\\)$'
-              THEN REPLACE(REGEXP_SUBSTR(info,'[\\d\\,]+'),',','')
-              ELSE NULL
-            END AS world_wide_rev
-          , CASE WHEN info ~ '\\$[\\d\\,]* \\(USA\\)$'
-              THEN REPLACE(REGEXP_SUBSTR(info,'[\\d\\,]+'),',','')
-              ELSE NULL
-            END AS usa_rev
-            
-        FROM movie_info AS movie_info
-        WHERE 
-          movie_info.info_type_id = 107
-      ) AS BOO
-      GROUP BY 1
-      HAVING MAX(world_wide_rev) IS NOT NULL OR MAX(usa_rev) IS NOT NULL
+        movie_id,
+        MAX(max_revenue) as usa_revenue
+      FROM ${movie_weekend_revenue.SQL_TABLE_NAME} as mr
+      GROUP BY movie_id
     
   fields:
   - dimension: movie_id
@@ -118,11 +101,6 @@
     hidden: true
     
   # Hide these because they are confusing.
-  
-  - dimension: world_wide_revenue
-    type: number
-    hidden: true
-    value_format: '$#,##0.00 \M'
   
   - dimension: usa_revenue
     type: number
@@ -132,11 +110,17 @@
   - dimension: revenue
     type: number
     hidden: true
-    sql: COALESCE(${world_wide_revenue}, ${usa_revenue})
+    sql: ${usa_revenue}
     value_format: '$#,##0.00 \M'
     
   - measure: total_revenue
     type: sum
     sql: ${revenue}
     value_format: '$#,##0.00 \M'
+    
+#   - measure: total_revenue2
+#     type: number
+#     sql: SUM(DISTINCT ${revenue})
+#     value_format: '$#,##0.00 \M'
+    
     

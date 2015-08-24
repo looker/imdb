@@ -117,6 +117,12 @@
     type: sum
     sql: ${revenue}
     value_format: '$#,##0.00 \M'
+ 
+  - measure: average_revenue
+    type: average
+    sql: ${revenue}
+    value_format: '$#,##0.00 \M'
+
     
 #   - measure: total_revenue2
 #     type: number

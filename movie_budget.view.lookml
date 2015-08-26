@@ -17,7 +17,7 @@
         {% if _dialect._name contains 'spark' %}
         ,regexp_extract(info,'^[^\\d\\s]*',0) 
            as budget_currency
-        , CAST(REGEXP_REPLACE(info, '[^\\d]','') AS DECIMAL(38,10))/1000000 as budget
+        , CAST(REGEXP_REPLACE(info, '[^\\d]','') AS DECIMAL(38,10))/1000000.0 as budget
         {% else %}
         , REGEXP_SUBSTR(info,'^[^\\d\\s]*') as budget_currency
         , CAST(NULLIF(REGEXP_REPLACE(info, '[^\\d]'),'') AS NUMERIC)/1000000 as budget        

@@ -19,18 +19,33 @@
       FROM (
         SELECT 
           movie_id
-          , SPLIT_PART(info,':',1) as country
           , note as kind
-          , SPLIT_PART(info,':',2) as date_string
-          , CASE 
-              WHEN SPLIT_PART(info,':',2) ~ '^\\d\\d [A-Za-z]+ \\d\\d\\d\\d$'
-                THEN TO_DATE( SPLIT_PART(info,':',2), 'DD Month YYYY')
-              WHEN SPLIT_PART(info,':',2) ~ '^[A-Za-z]+ \\d\\d\\d\\d$'
-                THEN TO_DATE( SPLIT_PART(info,':',2), 'Month YYYY')
-              WHEN SPLIT_PART(info,':',2) ~ '^\\d\\d\\d\\d$'
-                THEN TO_DATE( SPLIT_PART(info,':',2), 'YYYY')
-              ELSE NULL
-            END as release_date
+            {% if _dialect._name contains 'spark' %}
+              , SPLIT(info,':')[0] as country
+              , SPLIT(info,':')[1] as date_string
+              , CASE 
+                WHEN SPLIT(info,':')[1] RLIKE '^\\d\\d [A-Za-z]+ \\d\\d\\d\\d$'
+                  THEN FROM_UNIXTIME(UNIX_TIMESTAMP(SPLIT(info,':')[1],'dd MMMMM yyy'),'yyy-MM-dd')
+                -- WHEN SPLIT_PART(info,':',2) ~ '^[A-Za-z]+ \\d\\d\\d\\d$'
+                --  THEN TO_DATE( SPLIT_PART(info,':',2), 'Month YYYY')
+                -- WHEN SPLIT_PART(info,':',2) ~ '^\\d\\d\\d\\d$'
+                --  THEN TO_DATE( SPLIT_PART(info,':',2), 'YYYY')
+                ELSE NULL
+              END as release_date
+            {% else %}
+             , SPLIT_PART(info,':',1) as country
+             , SPLIT_PART(info,':',2) as date_string
+             , 
+             CASE 
+                WHEN SPLIT_PART(info,':',2) ~ '^\\d\\d [A-Za-z]+ \\d\\d\\d\\d$'
+                  THEN TO_DATE( SPLIT_PART(info,':',2), 'DD Month YYYY')
+                WHEN SPLIT_PART(info,':',2) ~ '^[A-Za-z]+ \\d\\d\\d\\d$'
+                  THEN TO_DATE( SPLIT_PART(info,':',2), 'Month YYYY')
+                WHEN SPLIT_PART(info,':',2) ~ '^\\d\\d\\d\\d$'
+                  THEN TO_DATE( SPLIT_PART(info,':',2), 'YYYY')
+                ELSE NULL
+              END as release_date
+            {% endif %}
         FROM movie_info
         WHERE 
           movie_info.info_type_id = 16
@@ -86,7 +101,7 @@
         , COUNT(DISTINCT CASE WHEN index = 1 THEN country ELSE NULL END) simultaneous_countries
         , COUNT(DISTINCT CASE WHEN index = 1 and country = 'USA' THEN 1 ELSE NULL END) usa_premiere
       FROM ${movie_release_dates.SQL_TABLE_NAME} as mrd
-      GROUP BY 1
+      GROUP BY movie_id
   
   fields:
   - dimension: movie_id

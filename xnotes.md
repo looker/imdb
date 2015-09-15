@@ -1,11 +1,12 @@
 ## Implementaiton Notes
 
-### Model shared between dialects | [imdb.model.lookml](imdb.model.lookml) |  [imdb_spark.model.lookml](imdb_spark.model.lookml) |  [imdb.base.lookml](imdb.base.lookml) 
+### Model shared between dialects 
+  * [imdb.model.lookml](imdb.model.lookml), [imdb_spark.model.lookml](imdb_spark.model.lookml), [imdb.base.lookml](imdb.base.lookml) 
 * Runs both Spark and Redshift
 * Uses a base file with a base explore, each model extends 
 * Spark has really poorly optimized Left Joins, so we inner join
 * Redshift doesn’t support lists
-* liquid to conditionally compile based on dialect | (movie_budget.view.lookml)[movie_budget.view.lookml]
+* liquid to conditionally compile based on dialect - [movie_budget.view.lookml](movie_budget.view.lookml)
 
 
 ### Reverse Join Pattern

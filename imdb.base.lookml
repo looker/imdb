@@ -86,7 +86,7 @@
 
     - join: movie_genre
       view_label: Title Genre
-      sql_on: ${title.id} = ${movie_genre.movie_id}
+      sql_on: ${title.id} = ${movie_genre.movie_id} 
       relationship: one_to_many
       
 #     - join: movie_is_genre
@@ -97,7 +97,7 @@
     - join: movie_genre2
       view_label: Title Genre (also in Title)
       from: movie_genre
-      sql_on: ${title.id} = ${movie_genre2.movie_id}
+      sql_on: ${title.id} = ${movie_genre2.movie_id} AND ${movie_genre.genre} <> ${movie_genre2.genre}
       relationship: one_to_many
       
     - join: movie_language

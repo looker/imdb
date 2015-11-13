@@ -1,11 +1,3 @@
-- explore: movie_budget
-  extends: title_simple
-  hidden: true
-  joins:
-  - join: title
-    sql_on: ${movie_budget.movie_id} = ${title.id}
-    relationship: many_to_one
-
 - view: movie_budget
   derived_table:
     persist_for: 100 hours
@@ -46,10 +38,16 @@
     type: sum
     sql: ${budget}
     value_format: '#,##0.00 \M'
-    filters:
-      budget_currency: '$'
+    #filters:
+    #  budget_currency: '$'
+    html: |
+      {{ budget_currency }} {{rendered_value}}
     
   - measure: average_budget
     type: average
     sql: ${budget}
     value_format: '#,##0.00 \M'
+    drill_fields: [movie_id,budget,budget_currency,info]
+    
+    
+    

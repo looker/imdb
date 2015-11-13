@@ -1,6 +1,3 @@
-- explore: movie_country_rating
-  hidden: true
-
 - view: movie_country_rating
   derived_table:
     persist_for: 100 hours

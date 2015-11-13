@@ -22,7 +22,7 @@ Start **[Exploring at the IMDB:Title Explorer](/explore/imdb/title)** and see if
 
 * A TV Episode is a kind of title (so all the title fields work).  What **TV Series Title** is the longest running measured in **Production Year Count**?  BONUS: What Year was it first produced?
 
-* What **Person** has appeared most ofthen on the **TV Series Title**d 'Late Show with David Letterman? (Hint: even a guest is a Cast Member with the Role/Job **Actor**)
+* What **Person** has appeared most often on the **TV Series Title**d 'Late Show with David Letterman? (Hint: even a guest is a Cast Member with the Role/Job **Actor**)
 
 ### More Advanced Puzzles
 

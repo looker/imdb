@@ -1,5 +1,5 @@
 # Redshift implementation of IMDB
-
+ 
 - connection: imdb
 
 - include: "*.view.lookml"       # include all the views

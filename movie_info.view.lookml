@@ -1,12 +1,3 @@
-- explore: movie_info
-  extends: title_simple
-  hidden: true
-  joins:
-  - join: title
-    sql_on: ${movie_info.movie_id} = ${title.id}
-    relationship: many_to_one
-
-
 - view: movie_info
   fields:
 

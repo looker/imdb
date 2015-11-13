@@ -1,37 +1,3 @@
-- view: title_base
-  sql_table_name: title
-  fields:
-  - dimension: id
-    primary_key: true
-    type: int
-    sql: ${TABLE}.id
-  
-  - dimension: imdb_id
-    type: int
-    sql: ${TABLE}.imdb_id
-    hidden: true
-    
-  - dimension: imdb_index
-    sql: ${TABLE}.imdb_index
-    hidden: true
-    
-  - dimension: kind_id
-    type: int
-    sql: ${TABLE}.kind_id
-    hidden: true
-
-  - dimension: title
-    sql: ${TABLE}.title
-
-  - dimension: production_year
-    type: int
-    sql: ${TABLE}.production_year
-
-  - measure: count
-    type: count
-    drill_fields: [id, kind_of_title, title, production_year]
-
-
 - view: title
   extends: title_base
   fields:
@@ -107,43 +73,5 @@
 
  
     
-- view: tv_series
-  sql_table_name: title
-  fields:
-  - dimension: id
-    label: TV Series ID
-    primary_key: true
-    type: int
-    sql: ${TABLE}.id
-  
-  - dimension: production_year
-    label: TV Series Production Year
-    type: int
-    sql: ${TABLE}.production_year
-
-  - measure: tv_series_count
-    type: count
-    drill_fields: [id, tv_series_title, production_year]
-    
-  - dimension: tv_series_years
-    sql: ${TABLE}.series_years
-    
-  - dimension: tv_series_title
-    sql: ${TABLE}.title
-    html: |
-      {{ linked_value }} [<a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=site:imdb.com+%22{{value}}+({{production_year._value}})%22">&#x2139;</a>]
-
 
     
-- view: title_extra
-  fields:
-  - measure: revenue_over_budget
-    type: number
-    sql: ${movie_revenue.total_revenue} / ${movie_budget.total_budget}
-    decimals: 4
-
-#   - dimension: opening_weekend_amount_tiered
-#     type: tier
-#     tiers: [1,5,10,20,50,100,250,500]
-#     sql: ${movie_weekend_revenue.weekend_amount}
-# 

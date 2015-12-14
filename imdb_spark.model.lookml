@@ -11,6 +11,7 @@
 
 - explore: title
   extends: title_base
+  hidden: true
   joins:
     - join: cast_info
       type: inner

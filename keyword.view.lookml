@@ -15,4 +15,3 @@
   - measure: count
     type: count
     drill_fields: [id, movie_keyword.count]
-

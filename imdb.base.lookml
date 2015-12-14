@@ -1,7 +1,7 @@
 - explore: title_base
   extension: required
   view: title
-  #sql_always_where: ${title.kind_id} <> 2 
+  #sql_always_where: ${title.kind_id} <> 2  
   extends: title_simple
   joins:
     - join: cast_info
@@ -169,3 +169,57 @@
       relationship: many_to_one
       view_label: Title
       
+- explore: person_info
+  hidden: true
+  joins:
+  - join: name
+    sql_on: ${person_info.person_id} = ${name.id}
+    relationship: many_to_one
+    
+    
+- explore: movie_weekend_revenue
+  extends: title_simple
+  hidden: true
+  joins:
+  - join: title
+    sql_on: ${movie_weekend_revenue.movie_id} = ${title.id}
+    relationship: many_to_one
+
+
+- explore: movie_release_dates
+  extends: title_simple
+  hidden: true
+  joins:
+  - join: title
+    sql_on: ${movie_release_dates.movie_id} = ${title.id}
+    relationship: many_to_one
+
+- explore: movie_release_facts
+  extends: title_simple
+  hidden: true
+  joins:
+  - join: title
+    sql_on: ${movie_release_facts.movie_id} = ${title.id}
+    relationship: many_to_one
+    
+- explore: movie_info
+  extends: title_simple
+  hidden: true
+  joins:
+  - join: title
+    sql_on: ${movie_info.movie_id} = ${title.id}
+    relationship: many_to_one
+
+- explore: movie_country_rating
+  hidden: true
+
+- explore: movie_budget
+  extends: title_simple
+  hidden: true
+  joins:
+  - join: title
+    sql_on: ${movie_budget.movie_id} = ${title.id}
+    relationship: many_to_one
+
+    
+

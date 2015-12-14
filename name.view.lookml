@@ -54,3 +54,4 @@
   - measure: person_count
     type: count
     drill_fields: [id, person_name, gender, title.count]
+    

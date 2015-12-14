@@ -1,6 +1,4 @@
 - view: cast_info
-#   derived_table:
-#     sql: SELECT * FROM cast_info
   fields:
 
   - dimension: id

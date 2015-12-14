@@ -55,7 +55,7 @@
     label: Average Number of Unique Production Years (in which they worked)
     type: average
     sql: ${years_with_titles}
-    description: number of different years with titles
+    description: average number of different years with titles
     decimals: 2
     
   - dimension: years_worked
@@ -68,7 +68,7 @@
     label: Average Number of Years Between the First Year they worked and the Last
     type: average
     sql: ${years_worked}
-    description: Difference between first production year and last production year +1
+    description: Average of Difference between first production year and last production year +1
     decimals: 2
 
   - dimension: years_acted
@@ -80,13 +80,13 @@
     label: Average Number of Unique Production Years where the Job was Acting (in which they worked)
     type: average
     sql: ${years_acted}
-    description: number of distinct production years where the role was acting
+    description: average of the number of distinct production years where the role was acting
     decimals: 2
 
   - dimension: lifetime_tv_episodes
     type: number
 
-  - dimension: lifetime_lifetime_tv_episodes_tiered
+  - dimension: lifetime_tv_episodes_tiered
     type: tier
     tiers: [1,3,10,20,50]
     style: integer
@@ -132,30 +132,5 @@
   - dimension: lifetime_titles_as_writer
     hidden: true
     
-- view: cast_top_genre
-  derived_table:
-    persist_for: 100 hours
-    indexes: [person_id]
-    sql: |
-      SELECT
-        person_id
-        , genre as top_genre
-      FROM (
-        SELECT
-          cast_info.person_id as person_id
-          , genre.genre as genre
-          , COUNT(*) AS num_titles
-          , ROW_NUMBER() OVER(PARTITION BY person_id ORDER BY num_titles DESC) as genre_rank
-        FROM title 
-        LEFT JOIN cast_info AS cast_info ON title.id = cast_info.movie_id
-        LEFT JOIN ${movie_genre.SQL_TABLE_NAME} AS genre ON title.id = genre.movie_id
-        GROUP BY 1,2
-      ) AS BOO
-      WHERE genre_rank = 1
-  fields:
-  - dimension: person_id
-    hidden: true
-    primary_key: true
-    
-  - dimension: top_genre
+
     

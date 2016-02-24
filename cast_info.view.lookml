@@ -1,37 +1,41 @@
 - view: cast_info
+  sql_table_name: imdb.cast_info
   fields:
 
   - dimension: id
     primary_key: true
-    type: int
+    type: number
     sql: ${TABLE}.id
     hidden: true
 
   - dimension: movie_id
-    type: int
+    type: number
     sql: ${TABLE}.movie_id
     hidden: true
 
   - dimension: note
     sql: ${TABLE}.note
 
-  - dimension: nr_order
-    type: int
+  - dimension: named_role_order
+    type: number
     sql: ${TABLE}.nr_order
-    hidden: true
+    
+  - measure: average_named_role_order
+    type: average
+    sql: ${named_role_order}
 
   - dimension: person_id
-    type: int
+    type: number
     sql: ${TABLE}.person_id
     hidden: true
 
   - dimension: person_role_id
-    type: int
+    type: number
     sql: ${TABLE}.person_role_id
     hidden: true
 
   - dimension: role_id
-    type: int
+    type: number
     sql: ${TABLE}.role_id
     hidden: true
     
@@ -54,4 +58,3 @@
   - measure: person_in_role_count
     type: count
     drill_fields: [id, name.person_name, role]
-

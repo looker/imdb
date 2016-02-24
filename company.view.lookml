@@ -1,17 +1,17 @@
 - view: company
-  sql_table_name: company_name
+  sql_table_name: imdb.company_name
   fields:
 
   - dimension: id
     primary_key: true
-    type: int
+    type: number
     sql: ${TABLE}.id
 
   - dimension: country_code
     sql: ${TABLE}.country_code
 
   - dimension: imdb_id
-    type: int
+    type: number
     sql: ${TABLE}.imdb_id
     hidden: true
 
@@ -33,5 +33,3 @@
   - measure: count
     type: count
     drill_fields: [id, company_name]
-
-

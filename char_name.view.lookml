@@ -1,14 +1,15 @@
 - view: char_name
+  sql_table_name: imdb.char_name
   fields:
 
   - dimension: id
     primary_key: true
-    type: int
+    type: number
     sql: ${TABLE}.id
     hidden: true
 
   - dimension: imdb_id
-    type: int
+    type: number
     sql: ${TABLE}.imdb_id
     hidden: true
 
@@ -34,5 +35,3 @@
   - measure: character_count
     type: count
     drill_fields: [id, character_name]
-
-

@@ -3,7 +3,7 @@
 
   - dimension: id
     primary_key: true
-    type: int
+    type: number
     sql: ${TABLE}.id
 
   - dimension: imdb_index
@@ -22,7 +22,7 @@
     sql: ${TABLE}.name_pcode_nf
 
   - dimension: person_id
-    type: int
+    type: number
     sql: ${TABLE}.person_id
 
   - dimension: surname_pcode
@@ -31,5 +31,3 @@
   - measure: count
     type: count
     drill_fields: [id, name]
-
-

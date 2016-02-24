@@ -3,7 +3,7 @@
   - measure: revenue_over_budget
     type: number
     sql: ${movie_revenue.total_revenue} / ${movie_budget.total_budget}
-    decimals: 4
+    value_format_name: decimal_4
 
 #   - dimension: opening_weekend_amount_tiered
 #     type: tier

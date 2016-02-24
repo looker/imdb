@@ -7,7 +7,7 @@
         movie_id
         , movie_info.info AS creation_location_full
         , TRIM(REGEXP_SUBSTR(movie_info.info,'[A-z\\s]+$')) as creation_location_country
-      FROM movie_info
+      FROM imdb.movie_info
       WHERE movie_info.info_type_id = 18
       
   fields:

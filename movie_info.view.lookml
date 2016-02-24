@@ -1,20 +1,21 @@
 - view: movie_info
+  sql_table_name: imdb.movie_info
   fields:
 
   - dimension: id
     primary_key: true
-    type: int
+    type: number
     sql: ${TABLE}.id
 
   - dimension: info
     sql: ${TABLE}.info
 
   - dimension: info_type_id
-    type: int
+    type: number
     sql: ${TABLE}.info_type_id
 
   - dimension: movie_id
-    type: int
+    type: number
     sql: ${TABLE}.movie_id
 
   - dimension: note
@@ -27,4 +28,3 @@
   - measure: movie_count
     type: count_distinct
     sql: ${movie_id}
-

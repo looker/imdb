@@ -1,9 +1,10 @@
 - view: keyword
+  sql_table_name: imdb.keyword
   fields:
 
   - dimension: id
     primary_key: true
-    type: int
+    type: number
     sql: ${TABLE}.id
 
   - dimension: keyword

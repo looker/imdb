@@ -4,12 +4,12 @@
 
   - dimension: episode_number
     view_label: TV Episode
-    type: int
+    type: number
     sql: ${TABLE}.episode_nr
     #hidden: true
     
   - dimension: episode_of_id
-    type: int
+    type: number
     sql: ${TABLE}.episode_of_id
     #hidden: true
     
@@ -37,7 +37,7 @@
     
   - dimension: season_number
     view_label: TV Episode
-    type: int
+    type: number
     sql: ${TABLE}.season_nr
     #hidden: true
     

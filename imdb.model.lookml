@@ -12,4 +12,4 @@
 - explore: title
   extends: title_base
   # Redshift doesn't support lists, remove the fields.
-  fields: [ALL_FIELDS*, -movie_genre.genre_list]
+  fields: [ALL_FIELDS*, -movie_genre.genre_list, -movie_genre2.genre_list]

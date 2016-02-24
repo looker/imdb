@@ -15,7 +15,7 @@
         , CAST(NULLIF(REGEXP_REPLACE(info, '[^\\d]'),'') AS NUMERIC)/1000000 as budget        
         {% endif %}
         , ROW_NUMBER() OVER(ORDER BY movie_id) as id
-      FROM movie_info AS movie_info
+      FROM imdb.movie_info AS movie_info
       WHERE movie_info.info_type_id = 105 
       
   fields:

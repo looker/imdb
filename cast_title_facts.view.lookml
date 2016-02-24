@@ -56,7 +56,7 @@
     type: average
     sql: ${years_with_titles}
     description: average number of different years with titles
-    decimals: 2
+    value_format_name: decimal_2
     
   - dimension: years_worked
     label: Years Between the First Year they worked and the Last
@@ -69,7 +69,7 @@
     type: average
     sql: ${years_worked}
     description: Average of Difference between first production year and last production year +1
-    decimals: 2
+    value_format_name: decimal_2
 
   - dimension: years_acted
     label: Number of Unique Production Years where the Job was Acting (in which they worked)
@@ -81,7 +81,7 @@
     type: average
     sql: ${years_acted}
     description: average of the number of distinct production years where the role was acting
-    decimals: 2
+    value_format_name: decimal_2
 
   - dimension: lifetime_tv_episodes
     type: number

@@ -3,18 +3,18 @@
 
   - dimension: id
     primary_key: true
-    type: int
+    type: number
     sql: ${TABLE}.id
 
   - dimension: info
     sql: ${TABLE}.info
 
   - dimension: info_type_id
-    type: int
+    type: number
     sql: ${TABLE}.info_type_id
 
   - dimension: movie_id
-    type: int
+    type: number
     sql: ${TABLE}.movie_id
 
   - dimension: note
@@ -24,4 +24,3 @@
     type: count
     drill_fields: [id]
     
-

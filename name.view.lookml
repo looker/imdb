@@ -3,28 +3,46 @@
     persist_for: 500 hours
     indexes: [id]
     sql: |
-      SELECT 
-        * 
-        , {% if _dialect._name contains 'spark' %}
-            CONCAT(SPLIT(name.name, ', ')[1], ' ', SPLIT(name.name, ', ')[0])
+     
+        SELECT 
+          *
+          {% if _dialect._name contains 'bigquery' %}
+          , CONCAT(first_name, ' ', last_name) as person_name
           {% else %}
-            SPLIT_PART(name.name, ', ', 2) || ' ' || SPLIT_PART(name.name, ', ', 1)  
-          {% endif %} AS person_name
-      FROM name
+          , {% concat %} first_name || ' ' || last_name {% endconcat %} as person_name
+          {% endif %}
+          FROM (
+            SELECT 
+              * 
+              
+             {% if _dialect._name contains 'bigquery' %}
+                , FIRST(SPLIT(name.name,', ')) AS last_name
+                , NTH(2,SPLIT(name.name,', ')) as first_name
+             {% elsif _dialect._name contains 'spark' %}
+                , SPLIT(name.name, ', ')[1] as last_name
+                , SPLIT(name.name, ', ')[0]) as first_name
+            {% else %}
+                , SPLIT_PART(name.name, ', ', 1) as last_name
+                , SPLIT_PART(name.name, ', ', 2) as first_name
+            {% endif %}
+            FROM imdb.name as name 
+          ) as n
+  
+      
       
   fields:
 
   - dimension: id
     label: Person ID
     primary_key: true
-    type: int
+    type: number
     sql: ${TABLE}.id
 
   - dimension: gender
     sql: ${TABLE}.gender
 
   - dimension: imdb_id
-    type: int
+    type: number
     sql: ${TABLE}.imdb_id
     hidden: true
 
@@ -38,6 +56,9 @@
 
   - dimension: person_name
     sql: ${TABLE}.person_name
+    
+  - dimension: last_name
+  - dimension: first_name
 
   - dimension: name_pcode_cf
     sql: ${TABLE}.name_pcode_cf

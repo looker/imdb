@@ -5,9 +5,9 @@
     sql: |
       SELECT 
         movie_id
-        , movie_info.info AS genre
-      FROM movie_info 
-      WHERE movie_info.info_type_id = 3
+        , info AS genre
+      FROM imdb.movie_info 
+      WHERE info_type_id = 3
       
   fields:
   - dimension: movie_id

@@ -1,18 +1,19 @@
 - connection: lookerdata_publicdata
+- label: 'IMDB'
 
 - include: "*.view.lookml"       # include all the views
 - include: "*.dashboard.lookml"  # include all the dashboards
 
 - include: imdb.base.lookml
 
-- case_sensitive: false
+- case_sensitive: false  
 
 - view: title_table_name
   sql_table_name: imdb.title
 
-- explore: title
+- explore: title    
   extends: title_base
-  hidden: true
+  hidden: false
   joins:
     - join: cast_info
       type: left_outer_each

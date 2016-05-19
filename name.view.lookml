@@ -1,6 +1,7 @@
 - view: name
   derived_table:
     persist_for: 500 hours
+    max_billing_tier: 3
     indexes: [id]
     sql: |
      

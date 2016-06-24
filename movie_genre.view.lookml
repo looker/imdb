@@ -6,7 +6,7 @@
       SELECT 
         movie_id
         , info AS genre
-      FROM imdb.movie_info 
+      FROM movie_info 
       WHERE info_type_id = 3
       
   fields:

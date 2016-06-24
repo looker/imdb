@@ -30,7 +30,7 @@
             {% else %}
                TO_DATE(RTRIM(REGEXP_SUBSTR(info,'[^\(]*$'),1),'DD Month YYYY') 
             {% endif %}  as weekend_date
-        FROM imdb.movie_info
+        FROM movie_info
         WHERE 
           movie_info.info_type_id = 107
           AND

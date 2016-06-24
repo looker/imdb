@@ -1,5 +1,5 @@
 - view: company
-  sql_table_name: imdb.company_name
+  sql_table_name: company_name
   fields:
 
   - dimension: id

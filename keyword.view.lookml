@@ -1,5 +1,5 @@
 - view: keyword
-  sql_table_name: imdb.keyword
+  sql_table_name: keyword
   fields:
 
   - dimension: id

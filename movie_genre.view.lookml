@@ -15,7 +15,7 @@
     
   - dimension: genre
   
-  - measure: genre_list
-    type: list
-    list_field: genre
+#   - measure: genre_list
+#     type: list
+#     list_field: genre
 

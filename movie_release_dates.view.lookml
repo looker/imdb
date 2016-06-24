@@ -37,7 +37,7 @@
                 ELSE NULL
               END as release_date
             {% endif %}
-        FROM imdb.movie_info
+        FROM movie_info
         WHERE 
           movie_info.info_type_id = 16
       ) AS BOO

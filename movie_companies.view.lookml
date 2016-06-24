@@ -1,5 +1,5 @@
 - view: movie_companies
-  sql_table_name: imdb.movie_companies
+  sql_table_name: movie_companies
   fields:
 
   - dimension: id

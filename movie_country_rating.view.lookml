@@ -8,7 +8,7 @@
         , SPLIT_PART(movie_info.info,':', 1) AS country
         , SPLIT_PART(movie_info.info,':', 2) AS rating
         , movie_info.info AS country_rating
-      FROM imdb.movie_info AS movie_info
+      FROM movie_info AS movie_info
       WHERE movie_info.info_type_id = 5
       
   fields:

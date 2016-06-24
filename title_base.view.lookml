@@ -1,5 +1,5 @@
 - view: title_base
-  sql_table_name: imdb.title
+  sql_table_name: public.title
   fields:
   - dimension: id
     primary_key: true

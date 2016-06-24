@@ -6,7 +6,7 @@
       SELECT 
         movie_id
         , info AS genre
-      FROM imdb.movie_info 
+      FROM movie_info 
       WHERE info_type_id = 3
       
   fields:
@@ -15,7 +15,7 @@
     
   - dimension: genre
   
-  - measure: genre_list
-    type: list
-    list_field: genre
+#   - measure: genre_list
+#     type: list
+#     list_field: genre
 

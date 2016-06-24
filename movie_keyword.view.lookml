@@ -7,7 +7,7 @@
         movie_id
         , keyword
         , ROW_NUMBER() OVER (order by movie_id) as id
-      FROM imdb.movie_keyword AS mk
+      FROM movie_keyword AS mk
       JOIN keyword AS k ON mk.keyword_id = k.id
 
   fields:

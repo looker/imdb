@@ -25,7 +25,7 @@
                 , SPLIT_PART(name.name, ', ', 1) as last_name
                 , SPLIT_PART(name.name, ', ', 2) as first_name
             {% endif %}
-            FROM imdb.name as name 
+            FROM name
           ) as n
   
       

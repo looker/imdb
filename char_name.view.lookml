@@ -1,5 +1,4 @@
 - view: char_name
-  sql_table_name: char_name
   fields:
 
   - dimension: id

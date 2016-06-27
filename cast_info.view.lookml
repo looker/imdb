@@ -1,5 +1,4 @@
 - view: cast_info
-  sql_table_name: cast_info
   fields:
 
   - dimension: id

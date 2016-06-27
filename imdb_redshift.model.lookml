@@ -1,6 +1,6 @@
 # Redshift implementation of IMDB
 - connection: imdb
-- label: 'IMDB'
+- label: 'IMDB Redshift'
 
 - include: "*.view.lookml"       # include all the views
 - include: "*.dashboard.lookml"  # include all the dashboards
@@ -9,7 +9,7 @@
   fields: [ALL_FIELDS*, -title.is_box_office_movie]
 #   extension: required
   view: title
-  label: 'IMDB Redshift'
+  label: 'Title'
   #sql_always_where: ${title.kind_id} <> 2  
 #   extends: title_simple
   joins:
@@ -60,9 +60,10 @@
       sql_on: ${title.id} = ${movie_companies.movie_id}
       relationship: one_to_many
       
-    - join: company
+    - join: company_name
+      sql_table_name: public.company_name
       view_label: Production Company
-      sql_on: ${movie_companies.company_id} = ${company.id}
+      sql_on: ${movie_companies.company_id} = ${company_name.id}
       relationship: many_to_one
 
     - join: movie_companies2
@@ -70,10 +71,10 @@
       sql_on: ${title.id} = ${movie_companies2.movie_id}
       relationship: one_to_many
       
-    - join: company_2
-      from: company
+    - join: company_name_2
+      from: company_name
       view_label: Production Company (also in Title)
-      sql_on: ${movie_companies2.company_id} = ${company_2.id}
+      sql_on: ${movie_companies2.company_id} = ${company_name_2.id}
       relationship: many_to_one
 
 

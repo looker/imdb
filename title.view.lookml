@@ -49,6 +49,10 @@
   - measure: count
     type: count
     drill_fields: [id, kind_of_title, title, production_year]
+    
+  - measure: count_Rank
+    type: count
+    drill_fields: [id, kind_of_title, title, production_year]
 
   - measure: tv_episode_count
     view_label: TV Episode

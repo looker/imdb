@@ -1,4 +1,5 @@
 - view: title_base
+  view_label: " "
   sql_table_name: title
   fields:
   - dimension: id

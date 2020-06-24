@@ -21,8 +21,8 @@ view: +title_base {
 # the explore to build suggestions from...
 explore: build_suggest {
   extends: [title_base]
-  from: title_base
-  view_name: title_base
+  from: title
+  view_name: title
   hidden: yes
 }
 
@@ -44,6 +44,7 @@ view: +search_map {
         STRUCT('movie_genre.genre', ${movie_genre.genre}),
         STRUCT('movie_keyword.keyword', ${movie_keyword.keyword}),
         STRUCT('tv_series.tv_series_title', ${tv_series.tv_series_title}),
+        STRUCT('title.title', ${title.title}),
         STRUCT('cast_info.role', ${cast_info.role})
       ]
     ;;

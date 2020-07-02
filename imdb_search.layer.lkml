@@ -57,6 +57,7 @@ view: +search_map {
     sql: ${title.id} ;;
     drill_fields: [title.id, title.title, title.production_year]
   }
+  dimension: search_primary_key {sql: ${title.id} ;;}
 }
 
 view: +search_suggest {

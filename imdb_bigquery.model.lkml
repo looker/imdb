@@ -1,4 +1,4 @@
-connection: "bigquery_test_db_connection"
+connection: "bigquery_publicdata_standard_sql"
 
 label: "IMDB BigQuery"
 
@@ -35,6 +35,10 @@ explore: title_base {
   }
   query: role_by_title_count {
     dimensions: [cast_info.role]
+    measures: [title.count]
+  }
+  query: tv_series_by_title_count {
+    dimensions: [tv_series.tv_series_title]
     measures: [title.count]
   }
 

@@ -20,6 +20,11 @@ explore: title_base {
   view_name: title
   label: "Title"
 
+  query: main {
+    description: "Titles"
+    measures: [title.count]
+  }
+
   query: production_year_by_title_count {
     dimensions: [title.production_year]
     measures: [title.count]

@@ -18,7 +18,7 @@ view: title_table_name {
 
 explore: title_base {
   view_name: title
-  label: "Title"
+  label: "Title Base"
 
   query: production_year_by_title_count {
     dimensions: [title.production_year]
